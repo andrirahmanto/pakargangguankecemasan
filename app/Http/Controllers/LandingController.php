@@ -49,30 +49,61 @@ class LandingController extends Controller
     public function printcheckbox(Request $request)
     {
         $user = Auth::user();
-        $listGejala = [];
-        // dd($request);
-        //1
-        if ($request->G1 == 'on' || $request->G2 == 'on' || $request->G3 == 'on' || $request->G4 == 'on' || $request->G5 == 'on' || $request->G6 == 'on' || $request->G7 == 'on' || $request->G8 == 'on' || $request->G9 == 'on' || $request->G10 == 'on' || $request->G11 == 'on' || $request->G12 == 'on' || $request->G13 == 'on' || $request->G14 == 'on' || $request->G15 == 'on' || $request->G16 == 'on') {
-            // dd("Hipertensi");
-            array_push($listGejala, "Gangguan Panik");
-        }
-        //2
-        if ($request->G17 == 'on' || $request->G18 == 'on' || $request->G19 == 'on' || $request->G20 == 'on' || $request->G21 == 'on') {
-            // dd("Jantung");
-            array_push($listGejala, "Fobia Spesifik");
-        }
-        //3
-        if ($request->G22 == 'on' || $request->G23 == 'on' || $request->G24 == 'on' || $request->G25 == 'on' || $request->G26 == 'on' || $request->G27 == 'on' || $request->G28 == 'on' || $request->G29 == 'on') {
-            // dd("Diabetes Melitus");
-            array_push($listGejala, "Gangguan Kecemasan Menyeluruh");
-        }
-        //4
-        if ($request->G30 == 'on' || $request->G31 == 'on' || $request->G32 == 'on'  || $request->G33 == 'on' || $request->G34 == 'on' || $request->G35 == 'on') {
-            // dd("Hiperkolesterolemia");
-            array_push($listGejala, "Fobia Sosial");
+        $input = $request->input('selected_questions');
+        $listGejala = [
+            [
+                'nama' => "Gangguan Panik",
+                'count' => 0,
+                'total' => 16,
+            ],
+            [
+                'nama' => "Fobia Spesifik",
+                'count' => 0,
+                'total' => 5,
+            ],
+            [
+                'nama' => "Gangguan Kecemasan Menyeluruh",
+                'count' => 0,
+                'total' => 8,
+            ],
+            [
+                'nama' => "Fobia Sosial",
+                'count' => 0,
+                'total' => 6,
+            ],
+        ];
+
+        foreach ($input as $diagnosis) {
+            foreach ($listGejala as &$gejala) {
+                if ($diagnosis == $gejala['nama']) {
+                    $gejala['count']++;
+                    break;
+                }
+            }
         }
 
-        // dd($listGejala);
+
+        // //1
+        // if ($request->G1 == 'on' || $request->G2 == 'on' || $request->G3 == 'on' || $request->G4 == 'on' || $request->G5 == 'on' || $request->G6 == 'on' || $request->G7 == 'on' || $request->G8 == 'on' || $request->G9 == 'on' || $request->G10 == 'on' || $request->G11 == 'on' || $request->G12 == 'on' || $request->G13 == 'on' || $request->G14 == 'on' || $request->G15 == 'on' || $request->G16 == 'on') {
+        //     // dd("Hipertensi");
+        //     array_push($listGejala, "Gangguan Panik");
+        // }
+        // //2
+        // if ($request->G17 == 'on' || $request->G18 == 'on' || $request->G19 == 'on' || $request->G20 == 'on' || $request->G21 == 'on') {
+        //     // dd("Jantung");
+        //     array_push($listGejala, "Fobia Spesifik");
+        // }
+        // //3
+        // if ($request->G22 == 'on' || $request->G23 == 'on' || $request->G24 == 'on' || $request->G25 == 'on' || $request->G26 == 'on' || $request->G27 == 'on' || $request->G28 == 'on' || $request->G29 == 'on') {
+        //     // dd("Diabetes Melitus");
+        //     array_push($listGejala, "Gangguan Kecemasan Menyeluruh");
+        // }
+        // //4
+        // if ($request->G30 == 'on' || $request->G31 == 'on' || $request->G32 == 'on'  || $request->G33 == 'on' || $request->G34 == 'on' || $request->G35 == 'on') {
+        //     // dd("Hiperkolesterolemia");
+        //     array_push($listGejala, "Fobia Sosial");
+        // }
+
 
         User::where('id', $user->id)->update([
             'penyakit' => $listGejala,

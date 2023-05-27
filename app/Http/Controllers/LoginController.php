@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -8,25 +9,27 @@ use RealRashid\SweetAlert\Facades\Alert;
 class LoginController extends Controller
 {
 
-    public function index(){
-        return view('login.index' , [
+    public function index()
+    {
+        return view('login.index', [
             'title' => 'Login',
         ]);
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
         $creds = $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($creds)){ // harusnya pake role yang buat middleware
+        if (Auth::attempt($creds)) { // harusnya pake role yang buat middleware
             $user = Auth::user();
-            if($user->role == 'admin'){
+            if ($user->role == 'admin') {
                 $request->session()->regenerate();
                 return redirect('/admin');
-            }else{
+            } else {
                 $request->session()->regenerate();
                 return redirect('/dashboard');
             }
@@ -36,11 +39,12 @@ class LoginController extends Controller
         return back()->with('loginError', 'Login failed');
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
 
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect('/home');
     }
 }

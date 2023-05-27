@@ -7,24 +7,24 @@
                 <a class="navbar-brand" href="/home" style="font-size: 20px;">Deteksi Gangguan Kecemasan</a>
             @endif
         @else
-            <a class="navbar-brand" href="/landing" style="font-size: 20px;">Deteksi Gangguan Kecemasan</a>
+            <a class="navbar-brand" href="/home" style="font-size: 20px;">Deteksi Gangguan Kecemasan</a>
         @endauth
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-top: 5px;">
-                <li class="nav-item">
-                    <a class="nav-link {{ $title === 'Welcome' ? 'active' : '' }}" href="/home">Home</a>
-                </li>
-                <li class="nav-item">
-                    @auth
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0" style="margin-top: 5px;">
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link {{ $title === 'Welcome' ? 'active' : '' }}" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
                         @if (auth()->user()->role != 'admin')
                             <a class="nav-link {{ $title === 'Diagnosa' ? 'active' : '' }}" href="/petunjuk">Diagnosa</a>
                         @endif
-                    @endauth
-                </li>
+                    </li>
+                @endauth
             </ul>
 
             <ul class="navbar-nav ms-auto">
