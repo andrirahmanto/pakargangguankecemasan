@@ -1,0 +1,4 @@
+edit admin ga masuk cssnya
+admin bisa liat history penyakit usernya
+admin bisa edit gejala penyakit, tapi gaboleh ngubah topic cuman wording aja
+admin gajadi bisa edit credentials usernya
