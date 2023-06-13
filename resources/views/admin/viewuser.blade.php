@@ -1,14 +1,14 @@
 @extends('landing')
 
 @section('content')
-<div class="col-sm-3">
-    <div class="card bg-light mb-4" style="max-width: 12rem;">
-        <div class="card-header">Total current user</div>
-        <div class="card-body">
-          <h2 class="card-title">{{sizeof($user)}}</h2>
+    <div class="col-sm-3">
+        <div class="card bg-light mb-4" style="max-width: 12rem;">
+            <div class="card-header">Total current user</div>
+            <div class="card-body">
+                <h2 class="card-title">{{ sizeof($user) }}</h2>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
     <table class="table table-dark table-striped border-light" style="justify-content:center;">
         <thead>
             <tr class="table-light" style="justify-content: center">
@@ -62,7 +62,9 @@
                                                 <div class="col-6">
                                                     <ul>
                                                         @foreach ($listPenyakit as $lp)
-                                                            <li>{{ $lp }}</li>
+                                                            <li>{{ $lp['nama'] }}
+                                                                ({{ $lp['count'] }}/{{ $lp['total'] }})
+                                                            </li>
                                                         @endforeach
                                                     </ul>
                                                 </div>
